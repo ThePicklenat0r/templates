@@ -5,7 +5,7 @@ parameters:
   arch: ''
 
 jobs:
-- job: 'build_${{ parameters.addon }}'
+- job: '${{ parameters.addon }}'
   pool:
     vmImage: 'ubuntu-latest'
   timeoutInMinutes: 360
