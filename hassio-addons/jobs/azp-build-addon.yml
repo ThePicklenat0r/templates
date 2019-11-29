@@ -7,7 +7,6 @@ parameters:
 jobs:
 
 - job: '${{ parameters.addon }}'
-  condition: eq(variables['Build.SourceBranchName'], 'master')
   pool:
     vmImage: 'ubuntu-latest'
   timeoutInMinutes: 360
