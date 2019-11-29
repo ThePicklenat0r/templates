@@ -3,7 +3,7 @@ parameters:
   repo: ''
 
 jobs:
-- job: 'Build ${{ parameters.addon }}'
+- job: 'Publish_${{ parameters.addon }}'
   pool:
     vmImage: 'ubuntu-latest'
   steps:
