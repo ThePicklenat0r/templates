@@ -14,7 +14,8 @@ jobs:
       git config --global user.email "$(gitUserEmail)"
       git config --global credential.helper store
       echo "https://$(githubToken):x-oauth-basic@github.com" > $HOME/.git-credentials
-
+    displayName: 'Install requirements'
+  - script: |
       release="$(Build.SourceBranchName)"
       git clone $(gitAddonRepo)
       cd '$(gitAddonRepoShort)/${{ parameters.addon }}'
@@ -29,9 +30,9 @@ jobs:
         cp ../../README.md README.md
       fi
       if [ -f ../../CHANGELOG.md ]; then
-        cp ../../CHANGELOG.md README.md
+        cp ../../CHANGELOG.md CHANGELOG.md
       fi
       
       git commit -am "Bump ${{ parameters.addon }} version"
       git push
-    displayName: 'Update $(gitAddonRepoShort)'
+    displayName: 'Update repository $(gitAddonRepoShort)'
