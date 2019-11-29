@@ -2,6 +2,10 @@
 
 Copy the azure-pipelines.yml file into the add-on repository and update the three parameters.
 
+In the add-on repository, create a folder that matches the slug of the addon.
+
+**_IMPORTANT:_** _The addon parameter, slug in config.json, and folder in the addon repository should all match._
+
 Create a project on Azure DevOps and create two variable groups:
 
 ## docker
