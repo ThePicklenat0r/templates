@@ -17,7 +17,7 @@ jobs:
 
       release="$(Build.SourceBranchName)"
       git clone $(gitAddonRepo)
-      cd '${{ parameters.repo }}/${{ parameters.addon }}'
+      cd '$(gitAddonRepoShort)/${{ parameters.addon }}'
       cp ../../config.json config.json
       if [ -f "../../icon.png" ] then; 
         cp ../../icon.png icon.png
@@ -31,3 +31,4 @@ jobs:
       
       git commit -am "Bump ${{ parameters.addon }} version"
       git push
+    displayName: 'Update $(gitAddonRepoShort)'
