@@ -1,5 +1,6 @@
 parameters:
   addon: ''
+  repo: ''
 
 jobs:
 - job: 'Build ${{ parameters.addon }}'
@@ -8,5 +9,25 @@ jobs:
   steps:
   - script: |
       sudo apt-get install -y --no-install-recommends \
-        jq curl
+        git jq curl
+      git config --global user.name "$(gitUserName)"
+      git config --global user.email "$(gitUserEmail)"
+      git config --global credential.helper store
+      echo "https://$(githubToken):x-oauth-basic@github.com > $HOME/.git-credentials"
+
       release="$(Build.SourceBranchName)"
+      git clone $(gitAddonRepo)
+      cd '${{ parameters.repo }}/${{ parameters.addon }}'
+      cp ../../config.json config.json
+      if [ -f "../../icon.png" ] then; 
+        cp ../../icon.png icon.png
+      fi
+      if [ -f "../../logo.png" ] then; 
+        cp ../../icon.png logo.png
+      fi
+      if [ -f "../../README.md" ] then; 
+        cp ../../README.md README.md
+      fi
+      
+      git commit -am "Bump ${{ parameters.addon }} version"
+      git push
