@@ -1,0 +1,7 @@
+parameters:
+  addon: ''
+
+jobs:
+- job: 'Build ${{ parameters.addon }}'
+  pool:
+    vmImage: 'ubuntu-latest'

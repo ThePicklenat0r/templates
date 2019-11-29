@@ -5,16 +5,15 @@ parameters:
   arch: ''
 
 jobs:
-
-- job: '${{ parameters.addon }}'
+- job: 'Build ${{ parameters.addon }}'
   pool:
     vmImage: 'ubuntu-latest'
   timeoutInMinutes: 360
   steps:
   - script: sudo docker login -u $(dockerUser) -p $(dockerToken)
-    displayName: 'Docker hub login'
+    displayName: 'Docker Hub Login'
   - script: sudo docker pull homeassistant/amd64-builder:$(versionBuilder)
-    displayName: 'Install Builder'
+    displayName: 'Install Hass.io Builder'
   - script: |
       sudo docker run --rm --privileged \
         -v ~/.docker:/root/.docker \
@@ -22,4 +21,4 @@ jobs:
         homeassistant/amd64-builder:$(versionBuilder) \
         --addon ${{ parameters.arch }} -t /data \
         --docker-hub $(dockerRepo) --docker-hub-check
-    displayName: 'Build ${{ parameters.addon }}'
+    displayName: 'Building ${{ parameters.addon }}'

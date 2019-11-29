@@ -14,4 +14,3 @@ stages:
   - template: /hassio-addons/jobs/azp-publish-addon.yml
     parameters:
       addon: '${{ parameters.addon }}'
-      arch: '${{ parameters.arch }}'
