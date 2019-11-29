@@ -5,14 +5,16 @@ Copy the azure-pipelines.yml file into the add-on repository and update the thre
 Create a project on Azure DevOps and create two variable groups:
 
 1. docker
-  var | Description
+
+  **var** | **Description**
   --- | ---
   dockerRepo | The Docker Hub repository to publish builds to
   dockerToken | Your Docker Hub Access Token (create a new one for each project)
   dockerUser | The Docker Hub user used to authenticate
 
 2. github
-  var | Description
+
+  **var** | **Description**
   --- | ---
   gitAddonRepo | URL to the github repository that contains your repository.json file. These templates will probably not work if it is in the same file as your addon's code.
   gitAddonRepoShort | Just the name of the repository used in gitAddonRepo
