@@ -6,13 +6,13 @@ parameters:
 stages:
 - stage: Build
   jobs: 
-  - template: /hassio-addons/jobs/azp-build-addon.yml
+  - template: /templates/azure/hassio-addons/jobs/azp-build-addon.yml
     parameters:
       addon: '${{ parameters.addon }}'
       arch: '${{ parameters.arch }}'
 - stage:
   jobs: 
-  - template: /hassio-addons/jobs/azp-publish-addon.yml
+  - template: /templates/azure/hassio-addons/jobs/azp-publish-addon.yml
     parameters:
       addon: '${{ parameters.addon }}'
       repo: '${{ parameters.repo }}'
