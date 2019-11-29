@@ -4,7 +4,7 @@ Copy the azure-pipelines.yml file into the add-on repository and update the thre
 
 Create a project on Azure DevOps and create two variable groups:
 
-1. docker
+## docker
 
   **var** | **Description**
   --- | ---
@@ -12,7 +12,7 @@ Create a project on Azure DevOps and create two variable groups:
   dockerToken | Your Docker Hub Access Token (create a new one for each project)
   dockerUser | The Docker Hub user used to authenticate
 
-2. github
+## github
 
   **var** | **Description**
   --- | ---
