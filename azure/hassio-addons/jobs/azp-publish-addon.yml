@@ -19,13 +19,13 @@ jobs:
       git clone $(gitAddonRepo)
       cd '$(gitAddonRepoShort)/${{ parameters.addon }}'
       cp ../../config.json config.json
-      if [ -f "../../icon.png" ] then; 
+      if [ -f "../../icon.png" ]; then
         cp ../../icon.png icon.png
       fi
-      if [ -f "../../logo.png" ] then; 
+      if [ -f "../../logo.png" ]; then
         cp ../../icon.png logo.png
       fi
-      if [ -f "../../README.md" ] then; 
+      if [ -f "../../README.md" ]; then
         cp ../../README.md README.md
       fi
       
