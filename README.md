@@ -1,2 +1,3 @@
-# Azure Pipelines Templates
-A collection of templates for use in Azure Pipelines
+# Templates
+
+A collection of templates used for various projects.
