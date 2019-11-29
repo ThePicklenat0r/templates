@@ -10,7 +10,7 @@ stages:
     parameters:
       addon: '${{ parameters.addon }}'
       arch: '${{ parameters.arch }}'
-- stage:
+- stage: Publish
   jobs: 
   - template: jobs/azp-publish-addon.yml
     parameters:
