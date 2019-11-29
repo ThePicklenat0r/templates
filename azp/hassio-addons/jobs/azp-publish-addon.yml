@@ -13,7 +13,7 @@ jobs:
       git config --global user.name "$(gitUserName)"
       git config --global user.email "$(gitUserEmail)"
       git config --global credential.helper store
-      echo "https://$(githubToken):x-oauth-basic@github.com > $HOME/.git-credentials"
+      echo "https://$(githubToken):x-oauth-basic@github.com" > $HOME/.git-credentials
 
       release="$(Build.SourceBranchName)"
       git clone $(gitAddonRepo)
