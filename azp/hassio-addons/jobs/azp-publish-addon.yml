@@ -17,7 +17,7 @@ jobs:
     displayName: 'Install requirements'
   - script: |
       release="$(Build.SourceBranchName)"
-      if [[ "$release" =~ b ]]; then
+      if [[ "$release" =~ b ]] && [[ -n $(gitAddonBeta) ]]; then
         git clone $(gitAddonBeta)
       else
         git clone $(gitAddonRepoShort)
@@ -36,7 +36,7 @@ jobs:
       if [ -f ../../CHANGELOG.md ]; then
         cp ../../CHANGELOG.md CHANGELOG.md
       fi
-      if [[ "$release" =~ b ]]; then
+      if [[ "$release" =~ b ]] && [[ -n $(gitAddonBeta) ]]; then
         $version="$(jq --raw-output '.version' config.json)"
         $image="$(jq --raw-output '.image' config.json)"
         sed -i "s|$version|$release|g" config.json
