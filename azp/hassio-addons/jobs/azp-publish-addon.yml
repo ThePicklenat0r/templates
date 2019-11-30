@@ -19,7 +19,7 @@ jobs:
   - template: ../steps/azp-version-addon.yml
   - script: |
       release="$(Build.SourceBranchName)"
-      repo="$(gitAddonRepoShort)"
+      repo="$(gitAddonRepo)"
       repoUrl="https://github.com/$(gitUser)/$(gitAddonRepo)"
       if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
         repoUrl="https://github.com/$(gitUser)/$(gitAddonRepoBeta)""
