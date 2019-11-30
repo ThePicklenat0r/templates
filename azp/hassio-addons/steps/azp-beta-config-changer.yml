@@ -9,3 +9,5 @@ steps:
         sed -i "s|$version|$release|g" config.json
         sed -i "s|$image|${image}-image|g" config.json
       fi
+    displayName: 'Update config.json if beta version'
+

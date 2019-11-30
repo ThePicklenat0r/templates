@@ -41,7 +41,6 @@ jobs:
       fi
     displayName: 'Copy required files to repo $(gitAddonRepoShort)'
   - template: ../steps/azp-beta-config-changer.yml
-    displayName: 'Update config.json if beta version'
   - script: |
       git commit -am "Bump ${{ parameters.addon }} version"
       git push
