@@ -16,7 +16,7 @@ jobs:
       git config --global credential.helper store
       echo "https://$(githubToken):x-oauth-basic@github.com" > $HOME/.git-credentials
     displayName: 'Install requirements'
-  - template: ../steps/azp-version-addon.yml
+  - template: ../steps/azp-beta-addon.yml
   - script: |
       release="$(Build.SourceBranchName)"
       repo="$(gitAddonRepo)"
