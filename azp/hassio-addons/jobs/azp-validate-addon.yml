@@ -10,7 +10,7 @@ jobs:
   - script: |
       sudo apt-get install -y --no-install-recommends \
         jq curl
-    dipsplayName: 'Install requirements'
+    displayName: 'Install requirements'
   - script: |
       release="$(Build.SourceBranchName)"
       config_version="$(jq --raw-output '.version' config.json)"
