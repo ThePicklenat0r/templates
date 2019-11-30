@@ -55,7 +55,7 @@ jobs:
       if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
         repoUrl="https://github.com/$(gitUser)/$(gitAddonRepoBeta)"
         repo=$(gitAddonRepoBeta)
-      elif [[ -n $(gitAddonRepoBeta) ]]
+      elif [[ -n $(gitAddonRepoBeta) ]]; then
         copy_files
         repoUrl="https://github.com/$(gitUser)/$(gitAddonRepoBeta)"
         repo=$(gitAddonRepoBeta)
