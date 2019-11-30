@@ -1,0 +1,8 @@
+# File: templates/azp/hassio-addons/steps/azp-bump-addon.yml
+
+steps:
+- script: | 
+    release="$(Build.SourceBranchName)"
+    version="$(jq --raw-output '.version' config.json)"
+    sed -i "s|$version|$release|g" config.json
+  displayName: 'Bump version in config.json'

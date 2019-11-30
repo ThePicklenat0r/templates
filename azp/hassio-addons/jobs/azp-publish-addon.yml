@@ -17,6 +17,8 @@ jobs:
       git config --global credential.helper store
       echo "https://$(githubToken):x-oauth-basic@github.com" > $HOME/.git-credentials
     displayName: 'Install requirements'
+  - template: ../steps/azp-bump-addon.yml
+    displayName: 'Bump version in config.json'
   - script: |
       release="$(Build.SourceBranchName)"
       repo="$(gitAddonRepoShort)"
@@ -41,11 +43,7 @@ jobs:
       if [ -f ../../CHANGELOG.md ]; then
         cp ../../CHANGELOG.md CHANGELOG.md
       fi
-      if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
-        version="$(jq --raw-output '.version' config.json)"
-        sed -i "s|$version|$release|g" config.json
-      fi
       git commit -am "Bump ${{ parameters.addon }} version"
       git push origin master
-    displayName: 'Update and copy required files'
+    displayName: 'Copy required files and commit'
 
