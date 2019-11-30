@@ -18,7 +18,6 @@ jobs:
       echo "https://$(githubToken):x-oauth-basic@github.com" > $HOME/.git-credentials
     displayName: 'Install requirements'
   - template: ../steps/azp-bump-addon.yml
-    displayName: 'Bump version in config.json'
   - script: |
       release="$(Build.SourceBranchName)"
       repo="$(gitAddonRepoShort)"
