@@ -42,6 +42,6 @@ jobs:
         cp ../../CHANGELOG.md CHANGELOG.md
       fi
       git commit -am "Bump ${{ parameters.addon }} version"
-      git push
+      git push --force
     displayName: 'Copy required files'
 
