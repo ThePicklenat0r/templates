@@ -10,6 +10,8 @@ jobs:
     vmImage: 'ubuntu-latest'
   timeoutInMinutes: 360
   steps:
+  - script: sudo apt-get install -y --no-install-recommends jq curl
+    displayName: 'Install requirements'
   - script: sudo docker login -u $(dockerUser) -p $(dockerToken)
     displayName: 'Docker Hub Login'
   - script: sudo docker pull homeassistant/amd64-builder:$(versionBuilder)
