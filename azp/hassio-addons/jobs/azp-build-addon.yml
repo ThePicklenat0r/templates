@@ -14,6 +14,7 @@ jobs:
     displayName: 'Docker Hub Login'
   - script: sudo docker pull homeassistant/amd64-builder:$(versionBuilder)
     displayName: 'Install Hass.io Builder'
+  - template: ../steps/azp-version-addon.yml
   - script: |
       sudo docker run --rm --privileged \
         -v ~/.docker:/root/.docker \
