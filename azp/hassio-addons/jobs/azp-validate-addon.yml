@@ -15,8 +15,14 @@ jobs:
       release="$(Build.SourceBranchName)"
       config_version="$(jq --raw-output '.version' config.json)"
 
-      if [[ $release != $config_version ]]; then
-        echo "Config version has not been updated!"
+      if [[ $release == $config_version ]]; then
+        echo config.json version validated!
+        exit 0
+      elif [[ $release =~ b ]]; then
+        echo Building for beta version
+        exit 0
+      else
+        echo "Config version has not been updated or is incorrect!"
         exit 1
       fi
     displayName: 'Check config.json version'
