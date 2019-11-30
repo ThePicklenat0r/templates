@@ -28,19 +28,25 @@ jobs:
       git clone $repoUrl
       mkdir -p '$repo/${{ parameters.addon }}'
       cd '$repo/${{ parameters.addon }}'
+      echo "Copying config.json"
       cp ../../config.json config.json
       if [ -f ../../icon.png ]; then
+        echo "Copying icon.png"
         cp ../../icon.png icon.png
       fi
       if [ -f ../../logo.png ]; then
+        echo "Copying logo.png"
         cp ../../icon.png logo.png
       fi
       if [ -f ../../README.md ]; then
+        echo "Copying README.md"
         cp ../../README.md README.md
       fi
       if [ -f ../../CHANGELOG.md ]; then
+        echo "Copying CHANGELOG.md"
         cp ../../CHANGELOG.md CHANGELOG.md
       fi
+      git add --all
       git commit -am "Bump ${{ parameters.addon }} version"
       git push --force
     displayName: 'Copy required files'
