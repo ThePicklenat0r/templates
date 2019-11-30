@@ -53,17 +53,15 @@ jobs:
       if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
         repoUrl="https://github.com/$(gitUser)/$(gitAddonRepoBeta)"
         repo=$(gitAddonRepoBeta)
-        echo "Copying to $repo..."
         copy_files
       elif [[ -n $(gitAddonRepoBeta) ]]; then
-        echo "Copying to $repo..."
+        pwd
         copy_files
         repoUrl="https://github.com/$(gitUser)/$(gitAddonRepoBeta)"
         repo=$(gitAddonRepoBeta)
-        echo "Copying to $repo..."
+        pwd
         copy_files
       else
-        echo "Copying to $repo..."
         copy_files
       fi
     displayName: 'Copy required files'
