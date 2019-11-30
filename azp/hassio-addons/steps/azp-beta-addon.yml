@@ -4,6 +4,7 @@ steps:
 - script: | 
     release="$(Build.SourceBranchName)"
     if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
+        echo "Build is beta"
         version="$(jq --raw-output '.version' config.json)"
         sed -i "s|$version|$release|g" config.json
     fi
