@@ -40,7 +40,7 @@ jobs:
           echo "  Copying README.md"
           cp $(Build.Repository.LocalPath)/README.md README.md
         fi
-        if [ -n $(Build.SourceVersionMessage) ]; then
+        if [ -n "$(Build.SourceVersionMessage)" ]; then
           echo "  Creating CHANGELOG.md"
           echo "$(Build.SourceVersionMessage)" > CHANGELOG.md
         fi
