@@ -4,8 +4,8 @@ steps:
   - script: |
       release="$(Build.SourceBranchName)"
       if [[ "$release" =~ b ]] && [[ -n $(gitAddonBeta) ]]; then
-        $version="$(jq --raw-output '.version' config.json)"
-        $image="$(jq --raw-output '.image' config.json)"
+        version="$(jq --raw-output '.version' config.json)"
+        image="$(jq --raw-output '.image' config.json)"
         sed -i "s|$version|$release|g" config.json
         sed -i "s|$image|${image}-image|g" config.json
       fi
