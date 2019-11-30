@@ -20,34 +20,33 @@ jobs:
   - script: |
       release="$(Build.SourceBranchName)"
       repo="$(gitAddonRepo)"
-      oDir=`pwd`
       function copy_files () {
         cd ../
         git clone $repoUrl
         mkdir -p "$repo/${{ parameters.addon }}"
         cd "$repo/${{ parameters.addon }}"
         echo "  Copying config.json"
-        cp $oDir/config.json config.json
-        if [ -f $oDir/icon.png ]; then
+        cp $(Build.Repository.LocalPath)/config.json config.json
+        if [ -f $(Build.Repository.LocalPath)/icon.png ]; then
           echo "  Copying icon.png"
-          cp $oDir/icon.png icon.png
+          cp $(Build.Repository.LocalPath)/icon.png icon.png
         fi
-        if [ -f $oDir/logo.png ]; then
+        if [ -f $(Build.Repository.LocalPath)/logo.png ]; then
           echo "  Copying logo.png"
-          cp $oDir/icon.png logo.png
+          cp $(Build.Repository.LocalPath)/icon.png logo.png
         fi
-        if [ -f $oDir/README.md ]; then
+        if [ -f $(Build.Repository.LocalPath)/README.md ]; then
           echo "  Copying README.md"
-          cp $oDir/README.md README.md
+          cp $(Build.Repository.LocalPath)/README.md README.md
         fi
-        if [ -f $oDir/CHANGELOG.md ]; then
+        if [ -f $(Build.Repository.LocalPath)/CHANGELOG.md ]; then
           echo "  Copying CHANGELOG.md"
-          cp $oDir/CHANGELOG.md CHANGELOG.md
+          cp $(Build.Repository.LocalPath)/CHANGELOG.md CHANGELOG.md
         fi
         git add --all
         git commit -am "Bump ${{ parameters.addon }} version"
         git push origin master
-        cd $oDir
+        cd $(Build.Repository.LocalPath)
       }
       repoUrl="https://github.com/$(gitUser)/$(gitAddonRepo)"
       if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
