@@ -1,3 +1,5 @@
+# File: templates/azp/hassio-addons/jobs/azp-publish-addon.yml
+
 parameters:
   addon: ''
   repo: ''
@@ -37,12 +39,10 @@ jobs:
       if [ -f ../../CHANGELOG.md ]; then
         cp ../../CHANGELOG.md CHANGELOG.md
       fi
-      if [[ "$release" =~ b ]] && [[ -n $(gitAddonBeta) ]]; then
-        $version="$(jq --raw-output '.version' config.json)"
-        $image="$(jq --raw-output '.image' config.json)"
-        sed -i "s|$version|$release|g" config.json
-        sed -i "s|$image|${image}-image|g" config.json
-      fi
+    displayName: 'Copy required files to repo $(gitAddonRepoShort)'
+  - template: ../steps/azp-beta-config-changer.yml
+    displayName: 'Update config.json if beta version'
+  - script: |
       git commit -am "Bump ${{ parameters.addon }} version"
       git push
-    displayName: 'Update repository $(gitAddonRepoShort)'
+    displayName: "Commit and push changes"

@@ -1,3 +1,5 @@
+# File: templates/azp/hassio-addons/jobs/azp-validate-addons.yml
+
 parameters:
   addon: ''
   repo: ''
@@ -14,7 +16,6 @@ jobs:
   - script: |
       release="$(Build.SourceBranchName)"
       config_version="$(jq --raw-output '.version' config.json)"
-
       if [[ $release == $config_version ]]; then
         echo config.json version validated!
         exit 0

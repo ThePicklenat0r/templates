@@ -1,3 +1,5 @@
+# File: templates/azp/hassio-addons/azp-release-addon.yml
+
 parameters:
   addon: ''
   arch: ''
