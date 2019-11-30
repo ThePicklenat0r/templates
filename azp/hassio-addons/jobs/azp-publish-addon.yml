@@ -22,7 +22,7 @@ jobs:
       repo="$(gitAddonRepo)"
       repoUrl="https://github.com/$(gitUser)/$(gitAddonRepo)"
       if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
-        repoUrl="https://github.com/$(gitUser)/$(gitAddonRepoBeta)""
+        repoUrl="https://github.com/$(gitUser)/$(gitAddonRepoBeta)"
         repo=$(gitAddonRepoBeta)
       fi
       git clone $repoUrl
