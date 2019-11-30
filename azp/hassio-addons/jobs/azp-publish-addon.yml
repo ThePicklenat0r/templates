@@ -42,6 +42,9 @@ jobs:
     displayName: 'Copy required files to repo $(gitAddonRepoShort)'
   - template: ../steps/azp-beta-config-changer.yml
   - script: |
+      git branch bump-${{ parameters.addon }}
       git commit -am "Bump ${{ parameters.addon }} version"
-      git push
+      git checkout master
+      git merge bump-${{ parameters.addon }}
+      git push origin master
     displayName: "Commit and push changes"
