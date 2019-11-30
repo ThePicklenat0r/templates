@@ -50,6 +50,7 @@ jobs:
       cd ../..
       mv $repo/ ../$repo/
       cd ../$repo
+      git add --all
       git commit -am "Bump ${{ parameters.addon }} version"
       git push origin master
     displayName: 'Copy required files'
