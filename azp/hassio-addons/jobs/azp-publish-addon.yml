@@ -20,7 +20,7 @@ jobs:
   - script: |
       release="$(Build.SourceBranchName)"
       repo="$(gitAddonRepo)"
-      oDir={pwd}
+      oDir=`pwd`
       echo "$oDir"
       function copy_files () {
         cd ../
