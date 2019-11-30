@@ -19,13 +19,15 @@ jobs:
     displayName: 'Install requirements'
   - script: |
       release="$(Build.SourceBranchName)"
-      if [[ "$release" =~ b ]] && [[ -n $(gitAddonBeta) ]]; then
-        git clone $(gitAddonBeta)
+      repo="$(gitAddonRepoShort)"
+      if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
+        git clone https://github.com/$(gitUser)/$(gitAddonRepoBeta)
+        repo=$(gitAddonRepoBeta)
       else
-        git clone $(gitAddonRepoShort)
+        git clone https://github.com/$(gitUser)/$(gitAddonRepo)
       fi
-      mkdir -p '$(gitAddonRepoShort)/${{ parameters.addon }}'
-      cd '$(gitAddonRepoShort)/${{ parameters.addon }}'
+      mkdir -p '$repo/${{ parameters.addon }}'
+      cd '$repo/${{ parameters.addon }}'
       cp ../../config.json config.json
       if [ -f ../../icon.png ]; then
         cp ../../icon.png icon.png
@@ -39,10 +41,11 @@ jobs:
       if [ -f ../../CHANGELOG.md ]; then
         cp ../../CHANGELOG.md CHANGELOG.md
       fi
-    displayName: 'Copy required files to repo $(gitAddonRepoShort)'
-  - template: ../steps/azp-beta-config-changer.yml
-  - script: |
-      git add --all
+      if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
+        version="$(jq --raw-output '.version' config.json)"
+        sed -i "s|$version|$release|g" config.json
+      fi
       git commit -am "Bump ${{ parameters.addon }} version"
       git push origin master
-    displayName: "Commit and push changes"
+    displayName: 'Update and copy required files'
+

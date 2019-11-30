@@ -6,11 +6,6 @@ parameters:
   repo: ''
 
 stages:
-- stage: Validate
-  jobs:
-  - template: jobs/azp-validate-addon.yml
-    parameters:
-      addon: '${{ parameters.addon }}'
 - stage: Build
   jobs: 
   - template: jobs/azp-build-addon.yml
