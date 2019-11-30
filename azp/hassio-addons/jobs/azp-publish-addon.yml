@@ -20,6 +20,7 @@ jobs:
   - script: |
       release="$(Build.SourceBranchName)"
       repo="$(gitAddonRepo)"
+      oDir=pwd
       function copy_files () {
         git clone $repoUrl
         mkdir -p "$repo/${{ parameters.addon }}"
@@ -48,6 +49,7 @@ jobs:
         git add --all
         git commit -am "Bump ${{ parameters.addon }} version"
         git push origin master
+        cd $oDir
       }
       repoUrl="https://github.com/$(gitUser)/$(gitAddonRepo)"
       if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
@@ -55,11 +57,9 @@ jobs:
         repo=$(gitAddonRepoBeta)
         copy_files
       elif [[ -n $(gitAddonRepoBeta) ]]; then
-        pwd
         copy_files
         repoUrl="https://github.com/$(gitUser)/$(gitAddonRepoBeta)"
         repo=$(gitAddonRepoBeta)
-        pwd
         copy_files
       else
         copy_files
