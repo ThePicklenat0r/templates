@@ -29,7 +29,6 @@ jobs:
       git clone $repoUrl
       mkdir -p "$repo/${{ parameters.addon }}"
       cd "$repo/${{ parameters.addon }}"
-      pwd
       echo "Copying config.json"
       cp ../../config.json config.json
       if [ -f ../../icon.png ]; then
@@ -48,6 +47,9 @@ jobs:
         echo "Copying CHANGELOG.md"
         cp ../../CHANGELOG.md CHANGELOG.md
       fi
+      cd ../..
+      mv $repo/ ../$repo/
+      cd ../$repo
       git commit -am "Bump ${{ parameters.addon }} version"
       git push origin master
     displayName: 'Copy required files'
