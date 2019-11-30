@@ -21,7 +21,6 @@ jobs:
       release="$(Build.SourceBranchName)"
       repo="$(gitAddonRepo)"
       oDir=`pwd`
-      echo "$oDir"
       function copy_files () {
         cd ../
         git clone $repoUrl
