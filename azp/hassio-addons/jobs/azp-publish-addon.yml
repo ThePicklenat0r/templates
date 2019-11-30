@@ -39,9 +39,9 @@ jobs:
           echo "  Copying README.md"
           cp $(Build.Repository.LocalPath)/README.md README.md
         fi
-        if [ -f $(Build.Repository.LocalPath)/CHANGELOG.md ]; then
-          echo "  Copying CHANGELOG.md"
-          cp $(Build.Repository.LocalPath)/CHANGELOG.md CHANGELOG.md
+        if [ -n $(Build.SourceVersionMessage)/CHANGELOG.md ]; then
+          echo "  Creating CHANGELOG.md"
+          echo "$(Build.SourceVersionMessage" > CHANGELOG.md
         fi
         git add --all
         git commit -am "Bump ${{ parameters.addon }} version"
