@@ -20,8 +20,8 @@ jobs:
   - script: |
       release="$(Build.SourceBranchName)"
       repo="$(gitAddonRepo)"
+      pwd=pwd
       function copy_files () {
-        pwd=pwd
         git clone $repoUrl
         mkdir -p "$repo/${{ parameters.addon }}"
         cd "$repo/${{ parameters.addon }}"
