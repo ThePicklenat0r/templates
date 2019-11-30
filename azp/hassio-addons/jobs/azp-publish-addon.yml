@@ -25,6 +25,7 @@ jobs:
         repoUrl="https://github.com/$(gitUser)/$(gitAddonRepoBeta)"
         repo=$(gitAddonRepoBeta)
       fi
+      
       git clone $repoUrl
       mkdir -p '$repo/${{ parameters.addon }}'
       cd '$repo/${{ parameters.addon }}'
@@ -46,8 +47,7 @@ jobs:
         echo "Copying CHANGELOG.md"
         cp ../../CHANGELOG.md CHANGELOG.md
       fi
-      git add --all
       git commit -am "Bump ${{ parameters.addon }} version"
-      git push --force
+      git push origin HEAD:$repo
     displayName: 'Copy required files'
 
