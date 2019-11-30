@@ -30,4 +30,4 @@ Create a project on Azure DevOps and create two variable groups:
 
 Then create a pipeline and point it to azure-pipelines.yml in your addon's GitHub repository.
 
-The addon should automatically build when a tag is created. The tag/release name will be used as the version number, so limit these to just the version e.g 1.1, v1.1, version 1.1, etc.
+The addon should automatically build when a tag is created. The tag/release name will be used as the version number, so limit these to just the version e.g 1.1, v1.1, 1.1b0, etc.
