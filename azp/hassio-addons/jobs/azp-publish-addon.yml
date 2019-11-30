@@ -22,30 +22,28 @@ jobs:
       repo="$(gitAddonRepo)"
       oDir=pwd
       function copy_files () {
+        cd ../
         git clone $repoUrl
         mkdir -p "$repo/${{ parameters.addon }}"
         cd "$repo/${{ parameters.addon }}"
         echo "  Copying config.json"
-        cp ../../config.json config.json
-        if [ -f ../../icon.png ]; then
+        cp $oDir/config.json config.json
+        if [ -f $oDir/icon.png ]; then
           echo "  Copying icon.png"
-          cp ../../icon.png icon.png
+          cp $oDir/icon.png icon.png
         fi
-        if [ -f ../../logo.png ]; then
+        if [ -f $oDir/logo.png ]; then
           echo "  Copying logo.png"
-          cp ../../icon.png logo.png
+          cp $oDir/icon.png logo.png
         fi
-        if [ -f ../../README.md ]; then
+        if [ -f $oDir/README.md ]; then
           echo "  Copying README.md"
-          cp ../../README.md README.md
+          cp $oDir/README.md README.md
         fi
-        if [ -f ../../CHANGELOG.md ]; then
+        if [ -f $oDir/CHANGELOG.md ]; then
           echo "  Copying CHANGELOG.md"
-          cp ../../CHANGELOG.md CHANGELOG.md
+          cp $oDir/CHANGELOG.md CHANGELOG.md
         fi
-        cd ../..
-        mv $repo/ ../$repo/
-        cd ../$repo
         git add --all
         git commit -am "Bump ${{ parameters.addon }} version"
         git push origin master
