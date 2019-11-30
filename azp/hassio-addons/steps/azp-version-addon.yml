@@ -3,6 +3,8 @@
 steps:
 - script: | 
     release="$(Build.SourceBranchName)"
-    version="$(jq --raw-output '.version' config.json)"
-    sed -i "s|$version|$release|g" config.json
-  displayName: 'Bump version in config.json'
+    if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
+        version="$(jq --raw-output '.version' config.json)"
+        sed -i "s|$version|$release|g" config.json
+    fi
+  displayName: 'Check for beta build'

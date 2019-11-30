@@ -3,9 +3,13 @@
 parameters:
   addon: ''
   arch: ''
-  repo: ''
 
 stages:
+- stage: Validate
+  jobs: 
+  - template: jobs/azp-validate-addon.yml
+    parameters:
+      addon: ${{ parameters.addon }}
 - stage: Build
   jobs: 
   - template: jobs/azp-build-addon.yml
@@ -17,4 +21,3 @@ stages:
   - template: jobs/azp-publish-addon.yml
     parameters:
       addon: '${{ parameters.addon }}'
-      repo: '${{ parameters.repo }}'

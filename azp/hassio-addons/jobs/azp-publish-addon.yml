@@ -2,7 +2,6 @@
 
 parameters:
   addon: ''
-  repo: ''
 
 jobs:
 - job: '${{ parameters.addon }}'
@@ -21,12 +20,12 @@ jobs:
   - script: |
       release="$(Build.SourceBranchName)"
       repo="$(gitAddonRepoShort)"
+      repoUrl="https://github.com/$(gitUser)/$(gitAddonRepo)"
       if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
-        git clone https://github.com/$(gitUser)/$(gitAddonRepoBeta)
+        repoUrl="https://github.com/$(gitUser)/$(gitAddonRepoBeta)""
         repo=$(gitAddonRepoBeta)
-      else
-        git clone https://github.com/$(gitUser)/$(gitAddonRepo)
       fi
+      git clone $repoUrl
       mkdir -p '$repo/${{ parameters.addon }}'
       cd '$repo/${{ parameters.addon }}'
       cp ../../config.json config.json
@@ -43,6 +42,6 @@ jobs:
         cp ../../CHANGELOG.md CHANGELOG.md
       fi
       git commit -am "Bump ${{ parameters.addon }} version"
-      git push origin master
-    displayName: 'Copy required files and commit'
+      git push
+    displayName: 'Copy required files'
 

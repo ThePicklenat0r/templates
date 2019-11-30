@@ -1,0 +1,28 @@
+# File: templates/azp/hassio-addons/jobs/azp-validate-addon.yml
+
+parameters:
+  addon: ''
+
+jobs:
+- job: '${{ parameters.addon }}'
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - script: |
+      sudo apt-get install -y --no-install-recommends \
+        jq curl
+    displayName: 'Install requirements'
+  - script: |
+      release="$(Build.SourceBranchName)"
+      config_version="$(jq --raw-output '.version' config.json)"
+      if [[ $release == $config_version ]]; then
+        echo config.json version validated!
+        exit 0
+      elif [[ $release =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
+        echo Building for beta version
+        exit 0
+      else
+        echo "Config version has not been updated or is incorrect!"
+        exit 1
+      fi
+    displayName: 'Check config.json version'
