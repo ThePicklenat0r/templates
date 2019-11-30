@@ -17,7 +17,11 @@ jobs:
     displayName: 'Install requirements'
   - script: |
       release="$(Build.SourceBranchName)"
-      git clone $(gitAddonRepo)
+      if [[ "$release" =~ b ]]; then
+        git clone $(gitAddonBeta)
+      else
+        git clone $(gitAddonRepoShort)
+      fi
       cd '$(gitAddonRepoShort)/${{ parameters.addon }}'
       cp ../../config.json config.json
       if [ -f ../../icon.png ]; then
@@ -32,7 +36,12 @@ jobs:
       if [ -f ../../CHANGELOG.md ]; then
         cp ../../CHANGELOG.md CHANGELOG.md
       fi
-      
+      if [[ "$release" =~ b ]]; then
+        $version="$(jq --raw-output '.version' config.json)"
+        $image="$(jq --raw-output '.image' config.json)"
+        sed -i "s|$version|$release|g" config.json
+        sed -i "s|$image|${image}-image|g" config.json
+      fi
       git commit -am "Bump ${{ parameters.addon }} version"
       git push
     displayName: 'Update repository $(gitAddonRepoShort)'

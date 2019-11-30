@@ -21,6 +21,7 @@ Create a project on Azure DevOps and create two variable groups:
   **var** | **Description**
   --- | ---
   gitAddonRepo | URL to the github repository that contains your repository.json file. These templates will probably not work if it is in the same file as your addon's code.
+  gitAddonBeta | URL to the GitHub repository used for beta builds. This will be used if the release has a "b" in the name. (e.g. 1.0b0)
   gitAddonRepoShort | Just the name of the repository used in gitAddonRepo
   githubToken | Personal Access token for GitHub (create a new one for each project)
   gitUserEmail | The email associated with your GitHub account
