@@ -26,3 +26,10 @@ jobs:
         exit 1
       fi
     displayName: 'Check config.json version'
+  - script: |
+      release="$(Build.SourceBranchName)"
+      if [[ ! -f CHANGELOG.md ]] && [[ ! $release =~ b ]]; then
+        echo CHANGELOG.md does not exist
+        exit 1
+      fi
+    displayName: 'Check for CHANGELOG.md'
