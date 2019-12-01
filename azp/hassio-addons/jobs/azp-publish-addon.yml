@@ -40,9 +40,16 @@ jobs:
           cp $(Build.Repository.LocalPath)/README.md README.md
         fi
         curl
-        if [ -f $(Build.Repository.LocalPath)/CHANGELOG.md ]; then
+        if [ -f "$(Build.Repository.LocalPath)/CHANGELOG.md" ]; then
           echo "  Copying CHANGELOG.md"
           cp $(Build.Repository.LocalPath)/CHANGELOG.md CHANGELOG.md
+        else
+          echo "  Generating CHANGELOG.md"
+          echo "[Change Log](https://github.com/$(gitUser)/$(repo)/releases/tag/$release)" > CHANGELOG.md
+          echo "" >> CHANGELOG.md
+          echo "" >> CHANGELOG.md
+          echo "Latest change:" >> CHANGELOG.md
+          echo "$(Build.SourceVersionMessage)" >> CHANGELOG.md
         fi
         git add --all
         git commit -am "Bump ${{ parameters.addon }} version"
