@@ -45,7 +45,7 @@ jobs:
           cp $(Build.Repository.LocalPath)/CHANGELOG.md CHANGELOG.md
         else
           echo "  Generating CHANGELOG.md"
-          echo "[Change Log](https://github.com/$(gitUser)/$(Build.Repository.Name)/releases/tag/$release)" > CHANGELOG.md
+          echo "[Change Log](https://github.com/$(Build.Repository.Name)/releases/tag/$release)" > CHANGELOG.md
           echo "" >> CHANGELOG.md
           echo "" >> CHANGELOG.md
           echo "Latest change:" >> CHANGELOG.md
