@@ -2,7 +2,7 @@
 
 Copy the azure-pipelines.yml file into the add-on repository and update the three parameters.
 
-In the add-on repository, create a folder that matches the slug of the addon.
+In the add-on repository, create a folder that matches the slug of the addon, all of your addon files should be here, except for the README.md file. Keep any other files (such as the azure-pipelines.yml) in the root of the repository.
 
 **_IMPORTANT:_** _The addon parameter, slug in config.json, and folder in the addon repository should all match._
 

@@ -26,23 +26,23 @@ jobs:
         mkdir -p "$repo/${{ parameters.addon }}"
         cd "$repo/${{ parameters.addon }}"
         echo "  Copying config.json"
-        cp $(Build.Repository.LocalPath)/config.json config.json
-        if [ -f $(Build.Repository.LocalPath)/icon.png ]; then
+        cp $(Build.Repository.LocalPath)/${{ parameters.addon }}/config.json config.json
+        if [ -f $(Build.Repository.LocalPath)/${{ parameters.addon }}/icon.png ]; then
           echo "  Copying icon.png"
-          cp $(Build.Repository.LocalPath)/icon.png icon.png
+          cp $(Build.Repository.LocalPath)/${{ parameters.addon }}/icon.png icon.png
         fi
-        if [ -f $(Build.Repository.LocalPath)/logo.png ]; then
+        if [ -f $(Build.Repository.LocalPath)/${{ parameters.addon }}/logo.png ]; then
           echo "  Copying logo.png"
-          cp $(Build.Repository.LocalPath)/icon.png logo.png
+          cp $(Build.Repository.LocalPath)/${{ parameters.addon }}/logo.png logo.png
         fi
         if [ -f $(Build.Repository.LocalPath)/README.md ]; then
           echo "  Copying README.md"
           cp $(Build.Repository.LocalPath)/README.md README.md
         fi
         curl
-        if [ -f "$(Build.Repository.LocalPath)/CHANGELOG.md" ]; then
+        if [ -f "$(Build.Repository.LocalPath)/${{ parameters.addon }}/CHANGELOG.md" ]; then
           echo "  Copying CHANGELOG.md"
-          cp $(Build.Repository.LocalPath)/CHANGELOG.md CHANGELOG.md
+          cp $(Build.Repository.LocalPath)/${{ parameters.addon }}/CHANGELOG.md CHANGELOG.md
         else
           echo "  Generating CHANGELOG.md"
           echo "[Change Log](https://github.com/$(Build.Repository.Name)/releases/tag/$release)" > CHANGELOG.md

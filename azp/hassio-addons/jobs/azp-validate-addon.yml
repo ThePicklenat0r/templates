@@ -14,7 +14,7 @@ jobs:
     displayName: 'Install requirements'
   - script: |
       release="$(Build.SourceBranchName)"
-      config_version="$(jq --raw-output '.version' config.json)"
+      config_version="$(jq --raw-output '.version' ${{ parameters.addon }}/config.json)"
       if [[ $release == $config_version ]]; then
         echo config.json version validated!
         exit 0
