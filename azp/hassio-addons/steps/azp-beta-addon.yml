@@ -2,10 +2,5 @@
 
 steps:
 - script: | 
-    release="$(Build.SourceBranchName)"
-    if [[ "$release" =~ b ]] && [[ -n $(gitAddonRepoBeta) ]]; then
-        echo "Build is beta"
-        version="$(jq --raw-output '.version' ${{ parameters.addon }}/config.json)"
-        sed -i "s|$version|$release|g" ${{ parameters.addon }}config.json
-    fi
+    jq '.version = "$(Build.SourceBranchName)"' config.json
   displayName: 'Check for beta build'
