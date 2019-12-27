@@ -2,5 +2,5 @@
 
 steps:
 - script: | 
-    jq '.version = "$(Build.SourceBranchName)"' config.json
+    jq '.version = "$(Build.SourceBranchName)"' ${{ parameters.addon }}/config.json
   displayName: 'Check for beta build'
